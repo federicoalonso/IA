@@ -17,7 +17,7 @@ if __name__ == '__main__':
     agent: Agent
     board: GameBoard
     agent = MiniMaxAgent()
-    logging.basicConfig(filename="./2048/RandomAgentMixedHeur-d6.txt", level=logging.INFO)
+    logging.basicConfig(filename="./2048/RandomAgentMixedHeur_6-d4.txt", level=logging.INFO)
     for i in range(10):
         board = GameBoard()
         done = False

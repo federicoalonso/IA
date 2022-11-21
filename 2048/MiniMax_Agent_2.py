@@ -10,7 +10,28 @@ class MiniMaxAgent(Agent):
     return self.getBestMove(board)
 
   def heuristic_utility(self, board: GameBoard):
-    return self.mixedHeuristic_4(board, 3)
+    return self.mixedHeuristic_6(board, 3)
+
+  def mixedHeuristic_6(self, board: GameBoard, weight: int):
+    if board.get_max_tile() == 2048:
+      return 100000000
+    # if len(board.get_available_cells()) == 0:
+    #   return -100000000
+    count = 0
+    sum = 0
+    smoothness = 0
+    for i in range(4):
+      for j in range(4):
+        if i < 3:
+          smoothness += abs(board.grid[i][j] - board.grid[i + 1][j])
+        if j < 3:
+          smoothness += abs(board.grid[i][j] - board.grid[i][j + 1])
+        sum += board.grid[i][j] ** 2
+        if board.grid[i][j] != 0:
+          count += 1
+    snoes = int(sum/count)
+    smoothness = smoothness ** weight
+    return snoes / smoothness
   
   # Sólo favorecemos abajo a la derecha
   def mixedHeuristic_5(self, board: GameBoard, weight: int):

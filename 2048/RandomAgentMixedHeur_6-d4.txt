@@ -2,18 +2,21 @@ INFO:root:
 
 Round number "1"
 INFO:root:
-Total time: 0:38:04.577219
+
+Round number "1"
 INFO:root:
-Total Moves: 867
+Total time: 0:03:14.057367
+INFO:root:
+Total Moves: 758
 INFO:root:"Loser"
 ******************************************************
 INFO:root:
 
 Round number "2"
 INFO:root:
-Total time: 0:52:02.779004
+Total time: 0:02:43.929404
 INFO:root:
-Total Moves: 829
+Total Moves: 765
 INFO:root:"Loser"
 ******************************************************
 INFO:root:

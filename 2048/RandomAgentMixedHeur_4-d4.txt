@@ -1,0 +1,90 @@
+INFO:root:
+
+Round number "1"
+INFO:root:
+Total time: 0:04:14.386353
+INFO:root:
+Total Moves: 1019
+INFO:root:"Loser"
+******************************************************
+INFO:root:
+
+Round number "2"
+INFO:root:
+Total time: 0:02:31.988638
+INFO:root:
+Total Moves: 770
+INFO:root:"Loser"
+******************************************************
+INFO:root:
+
+Round number "3"
+INFO:root:
+Total time: 0:01:59.172931
+INFO:root:
+Total Moves: 656
+INFO:root:"Loser"
+******************************************************
+INFO:root:
+
+Round number "4"
+INFO:root:
+Total time: 0:03:30.650349
+INFO:root:
+Total Moves: 989
+INFO:root:"WON THE GAME!!!!!!!!"
+******************************************************
+INFO:root:
+
+Round number "5"
+INFO:root:
+Total time: 0:01:28.195031
+INFO:root:
+Total Moves: 288
+INFO:root:"Loser"
+******************************************************
+INFO:root:
+
+Round number "6"
+INFO:root:
+Total time: 0:02:18.007036
+INFO:root:
+Total Moves: 729
+INFO:root:"Loser"
+******************************************************
+INFO:root:
+
+Round number "7"
+INFO:root:
+Total time: 0:02:33.581485
+INFO:root:
+Total Moves: 935
+INFO:root:"Loser"
+******************************************************
+INFO:root:
+
+Round number "8"
+INFO:root:
+Total time: 0:01:48.589007
+INFO:root:
+Total Moves: 546
+INFO:root:"Loser"
+******************************************************
+INFO:root:
+
+Round number "9"
+INFO:root:
+Total time: 0:02:02.623018
+INFO:root:
+Total Moves: 742
+INFO:root:"Loser"
+******************************************************
+INFO:root:
+
+Round number "10"
+INFO:root:
+Total time: 0:01:46.449209
+INFO:root:
+Total Moves: 502
+INFO:root:"Loser"
+******************************************************

@@ -4,7 +4,7 @@ import sys
 import time
 env = gym.make('CartPole-v1', render_mode='human')
 
-q_table = np.load('800000-qtable.npy')
+q_table = np.load('5400000-qtable.npy')
 
 discrete_buckets = [50]
 bucket_amount = 50
@@ -40,6 +40,7 @@ for _ in range(10):
     while not done:
         
         action = np.argmax(q_table[discrete_state])
+        print(q_table[discrete_state])
         print(action)
         obs, reward, done, info, _ = env.step(action)
         #print(obs)

@@ -4,7 +4,7 @@ import sys
 
 LEARNING_RATE = 0.1
 DISCOUNT = 0.95 #Reward futuros vs rewards actuales, mide cuanto nos interesa lo futuro y lo actual
-episodes = 1000000
+episodes = 10000000
 show_every = 2000
 
 env = gym.make('CartPole-v1')
@@ -15,7 +15,7 @@ env = gym.make('CartPole-v1')
 
 discrete_buckets = [50]
 bucket_amount = 50
-q_table = np.random.uniform(0, 0.5, (bucket_amount, bucket_amount, bucket_amount, bucket_amount, env.action_space.n))
+q_table = np.random.uniform(0, 0, (bucket_amount, bucket_amount, bucket_amount, bucket_amount, env.action_space.n))
 #q_table = np.full((bucket_amount, bucket_amount, bucket_amount, bucket_amount, env.action_space.n), 1)
 #q_table = np.random.uniform(0, 0.2, (bucket_amount, bucket_amount, bucket_amount, bucket_amount, env.action_space.n))
 #q_table = np.random.uniform(low=-2, high=0, size=(discrete_buckets) + [env.action_space.n])

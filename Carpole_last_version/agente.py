@@ -1,24 +1,25 @@
 import numpy as np 
 import gym
+import matplotlib.pyplot as plt
 import sys
 
 LEARNING_RATE = 0.1
-DISCOUNT = 0.95 #Reward futuros vs rewards actuales, mide cuanto nos interesa lo futuro y lo actual
+DISCOUNT = 0.85 #Reward futuros vs rewards actuales, mide cuanto nos interesa lo futuro y lo actual
 episodes = 10000000
-show_every = 2000
+show_every = 100000
+# Exploration settings
+STATS_EVERY = 100000
+save_every = 100000
+
+# Para llevar un conteo y poder graficar
+ep_rewards = []
+aggr_ep_rewards = {'ep': [], 'avg': [], 'max': [], 'min': []}
 
 env = gym.make('CartPole-v1')
-#env.reset()
-#print(env.observation_space.high)
-#print(env.observation_space.low)
-#print(env.action_space.n)
 
-discrete_buckets = [50]
-bucket_amount = 50
+discrete_buckets = [10]
+bucket_amount = 10
 q_table = np.random.uniform(0, 0, (bucket_amount, bucket_amount, bucket_amount, bucket_amount, env.action_space.n))
-#q_table = np.full((bucket_amount, bucket_amount, bucket_amount, bucket_amount, env.action_space.n), 1)
-#q_table = np.random.uniform(0, 0.2, (bucket_amount, bucket_amount, bucket_amount, bucket_amount, env.action_space.n))
-#q_table = np.random.uniform(low=-2, high=0, size=(discrete_buckets) + [env.action_space.n])
 angle_min = -0.418
 angle_max = 0.418 
 velocity_min = -sys.maxsize
@@ -31,10 +32,7 @@ bins_angle = np.linspace(angle_min, angle_max, bucket_amount)
 bins_angular_velocity = np.linspace(angular_vel_min, angular_vel_max, bucket_amount)
 bins_position = np.linspace(position_min, position_max, bucket_amount)
 bins_velocity = np.linspace(velocity_min, velocity_max, bucket_amount)
-#print(bins_angle)
-#print(bins_angular_velocity)
-#print(bins_position)
-#print(bins_velocity)
+
 
 def get_discrete_state(state):
     cart_position = state[0]
@@ -49,11 +47,7 @@ def get_discrete_state(state):
     return discretized_state
 
 discrete_state = get_discrete_state(env.reset()[0])
-#print(discrete_state)
-#print(q_table[discrete_state])
-#q_table[discrete_state][1] = 10
-#print(q_table[discrete_state])
-#print(np.argmax(q_table[discrete_state]))
+
 
 def epsilon_greedy_policy(state, Q, epsilon=0.1):
     explore = np.random.binomial(1, epsilon)
@@ -69,8 +63,10 @@ def optimal_policy(state, Q):
     action = np.argmax(Q[state])
     return action
 episode = 0
+
 for episode in range(episodes):
-    if episode % 200000 == 0:
+    episode_reward = 0
+    if episode % save_every == 0:
         np.save(f"qtables/{episode}-qtable.npy",q_table)
         print(episode)
     env.reset()
@@ -84,6 +80,7 @@ for episode in range(episodes):
     while not terminated and not truncated:
         action = epsilon_greedy_policy(discrete_state, q_table, 0.5)
         new_state, reward, terminated, truncated, info = env.step(action)
+        episode_reward += reward
         new_discrete_state = get_discrete_state(new_state)
         #if render:
             #env.render()
@@ -99,7 +96,22 @@ for episode in range(episodes):
             print("Llegó al final en el episodio ", episode)
         
         discrete_state = new_discrete_state
+    #print("Reward total obtenido: ", episode_reward)
+    ep_rewards.append(episode_reward)
+    if not episode % STATS_EVERY:
+        average_reward = sum(ep_rewards[-STATS_EVERY:])/STATS_EVERY
+        aggr_ep_rewards['ep'].append(episode)
+        aggr_ep_rewards['avg'].append(average_reward)
+        aggr_ep_rewards['max'].append(max(ep_rewards[-STATS_EVERY:]))
+        aggr_ep_rewards['min'].append(min(ep_rewards[-STATS_EVERY:]))
+        #print(f'Episode: {episode:>5d}, average reward: {average_reward:>4.1f}, current epsilon: {epsilon:>1.2f}')
 
-np.save(f"qtables/{episode}-qtable.npy",q_table)
+np.save(f"qtables/{episode}-qtable.npy",q_table) #Guarda la ultima qtable generada
+#Grafico de la ejecucion
+plt.plot(aggr_ep_rewards['ep'], aggr_ep_rewards['avg'], label="average rewards")
+plt.plot(aggr_ep_rewards['ep'], aggr_ep_rewards['max'], label="max rewards")
+plt.plot(aggr_ep_rewards['ep'], aggr_ep_rewards['min'], label="min rewards")
+plt.legend(loc=4)
+plt.show()  
 
 env.close()

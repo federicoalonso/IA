@@ -4,11 +4,12 @@ import sys
 import time
 env = gym.make('CartPole-v1', render_mode='human')
 
-q_table = np.load('5400000-qtable.npy')
+q_table = np.load('9999999-qtable.npy')
 
-discrete_buckets = [50]
-bucket_amount = 50
-q_table = np.random.uniform(0, 0.5, (bucket_amount, bucket_amount, bucket_amount, bucket_amount, env.action_space.n))
+
+discrete_buckets = [10]
+bucket_amount = 10
+#q_table = np.random.uniform(0, 0.5, (bucket_amount, bucket_amount, bucket_amount, bucket_amount, env.action_space.n))
 angle_min = -0.418
 angle_max = 0.418 
 velocity_min = -sys.maxsize
@@ -33,19 +34,27 @@ def get_discrete_state(state):
     discrete_angular_velocity = np.digitize(pole_vel, bins_angular_velocity)
     discretized_state = (discrete_position, discrete_velocity, discrete_angle, discrete_angular_velocity)
     return discretized_state
-for _ in range(10):
-    
+
+for episode in range(100):
+    episodeReward = 0
+
     discrete_state = get_discrete_state(env.reset()[0]) 
     done = False
     while not done:
         
         action = np.argmax(q_table[discrete_state])
+        #print(discrete_state)
+        #print(action)
         print(q_table[discrete_state])
-        print(action)
+        #print(action)
         obs, reward, done, info, _ = env.step(action)
+        episodeReward += reward
         #print(obs)
-        env.render()
+        #env.render()
         time.sleep(0.05)
         if done:
             env.reset()
+
+    print("Reward Total en episodio ", episode, ": ", episodeReward)
+
 env.close()

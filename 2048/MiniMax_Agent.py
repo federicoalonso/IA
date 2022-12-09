@@ -134,7 +134,7 @@ class MiniMaxAgent(Agent):
 
     return (minChild, minUtility)
 
-  def getBestMove(self, board: GameBoard, d: int = 6):
+  def getBestMove(self, board: GameBoard, d: int = 4):
     clone = board.clone()
     (child, _, moveFrom) = self.maxi(clone, (-1) * sys.maxsize, sys.maxsize, d)
     return moveFrom

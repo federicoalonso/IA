@@ -1,5 +1,10 @@
 ## 2048
 
+Falta la funcion heuristica, comprobar que si gana es mayor a que si pierde
+Que sea una funcion rapida
+Monocolor, todas crezcan en un sentido
+Explicar bien como llegamos a la heuristica
+
 ### Abordaje del problema
 
 Este problema decidimos abordarlo mediante la tecnica MiniMax, para asegurarnos garantizar el mínimo resultado posible. 

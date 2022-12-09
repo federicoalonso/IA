@@ -17,15 +17,15 @@ if __name__ == '__main__':
     agent: Agent
     board: GameBoard
     agent = MiniMaxAgent()
-    logging.basicConfig(filename="./2048/RandomAgentMixedHeur_6-d4.txt", level=logging.INFO)
-    for i in range(10):
+    #logging.basicConfig(filename="./2048/RandomAgentMixedHeur_test-d4.txt", level=logging.INFO)
+    for i in range(1):
         board = GameBoard()
         done = False
         moves = 0
         board.render()
         start = datetime.now()
 
-        logging.info('\n\nRound number "{}"'.format(i + 1))
+        #logging.info('\n\nRound number "{}"'.format(i + 1))
         while not done:
             if moves % 100 == 0:
                 cent = 0
@@ -39,11 +39,11 @@ if __name__ == '__main__':
 
         print('\nTotal time: {}'.format(datetime.now() - start))
         print('\nTotal Moves: {}'.format(moves))
-        logging.info('\nTotal time: {}'.format(datetime.now() - start))
-        logging.info('\nTotal Moves: {}'.format(moves))
+        #logging.info('\nTotal time: {}'.format(datetime.now() - start))
+        #logging.info('\nTotal Moves: {}'.format(moves))
         if check_win(board):
             print("WON THE GAME!!!!!!!!")
-            logging.info('"WON THE GAME!!!!!!!!"\n******************************************************')
+            #logging.info('"WON THE GAME!!!!!!!!"\n******************************************************')
         else:
             print("BOOOOOOOOOO!!!!!!!!!")
-            logging.info('"Loser"\n******************************************************')
+            #logging.info('"Loser"\n******************************************************')

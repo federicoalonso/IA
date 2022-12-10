@@ -3,6 +3,7 @@ from GameBoard import GameBoard
 from Agent import Agent
 # from Random_Agent import RandomAgent
 from MiniMax_Agent import MiniMaxAgent
+from ExpectiMax_Agent import ExpectiMax_Agent
 # from MiniMax_Agent_2 import MiniMaxAgent
 import logging
 
@@ -17,7 +18,11 @@ if __name__ == '__main__':
     agent: Agent
     board: GameBoard
     agent = MiniMaxAgent()
-    #logging.basicConfig(filename="./2048/RandomAgentMixedHeur_test-d4.txt", level=logging.INFO)
+    # agent = ExpectiMax_Agent()
+    logging.basicConfig(filename="./2048/MMAgent_test-d6.txt", level=logging.INFO)
+    results = []
+    times = []
+    total_moves = []
     for i in range(1):
         board = GameBoard()
         done = False
@@ -25,25 +30,47 @@ if __name__ == '__main__':
         board.render()
         start = datetime.now()
 
-        #logging.info('\n\nRound number "{}"'.format(i + 1))
+        logging.info('\n\nRound number "{}"'.format(i + 1))
         while not done:
             if moves % 100 == 0:
                 cent = 0
             action = agent.play(board)
-            print('Next Action: "{}"'.format(
-                int_to_string[action]), ',   Move: {}'.format(moves))
+            # print('Next Action: "{}"'.format(int_to_string[action]), ',   Move: {}'.format(moves))
             done = board.play(action)
             done = done or check_win(board)
-            board.render()
+            # board.render()
             moves += 1
-
-        print('\nTotal time: {}'.format(datetime.now() - start))
+        total_time = datetime.now() - start
+        times.append(total_time.total_seconds())
+        total_moves.append(moves)
+        print('\nTotal time: {}'.format(total_time))
         print('\nTotal Moves: {}'.format(moves))
-        #logging.info('\nTotal time: {}'.format(datetime.now() - start))
-        #logging.info('\nTotal Moves: {}'.format(moves))
+        logging.info('\nTotal time: {}'.format(total_time))
+        logging.info('\nTotal Moves: {}'.format(moves))
         if check_win(board):
             print("WON THE GAME!!!!!!!!")
-            #logging.info('"WON THE GAME!!!!!!!!"\n******************************************************')
+            results.append(1)
+            logging.info('"WON THE GAME!!!!!!!!"\n******************************************************')
         else:
             print("BOOOOOOOOOO!!!!!!!!!")
-            #logging.info('"Loser"\n******************************************************')
+            results.append(0)
+            logging.info('"Loser"\n******************************************************')
+        
+    logging.info('"Results"******************************************************')
+    sum_won = 0
+    sum_time = 0
+    sum_moves = 0
+    
+    for i in range(len(results)):
+        sum_won += results[i]
+        sum_time += times[i]
+        sum_moves += total_moves[i]
+    
+    avg_won = sum_won / len(results)
+    avg_time = sum_time / len(results)
+    avg_mov = sum_moves / len(results)
+
+    logging.info('\Average Wons: {}%'.format(avg_won * 100))
+    logging.info('\Average Moves: {}'.format(avg_mov))
+    logging.info('\Average Time: {}'.format(avg_time))
+

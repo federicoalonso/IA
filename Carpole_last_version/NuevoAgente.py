@@ -10,10 +10,10 @@ import gym
 env = gym.make('CartPole-v1')
 ep_rewards = []
 cumulative_reward = {'ep': [], 'avg': [], 'max': [], 'min': []}
-show_every = 100000
-stats_every = 100000
-save_every = 100000
-episodes = 2000000
+show_every = 100
+stats_every = 100
+save_every = 100
+episodes = 2000
 max_learning_rate = 1.0
 decrase_learning_rate_factor = 50
 max_exploration_rate = 1.0
@@ -24,7 +24,7 @@ learning_rate_decreased = 1.0
 exploration_rate_decreased = 1.0
 
 
-n_bins = ( 6 , 12 )
+n_bins = ( 2 , 2 )
 lower_bounds = [ env.observation_space.low[2], -math.radians(50) ]
 upper_bounds = [ env.observation_space.high[2], math.radians(50) ]
 

@@ -1,3 +1,68 @@
+"""
+#AGENTE SIMULACION
+import numpy as np 
+import gym
+import sys
+import time
+env = gym.make('CartPole-v1', render_mode='human')
+
+q_table = np.load('9999999-qtable.npy')
+
+
+discrete_buckets = [10]
+bucket_amount = 10
+#q_table = np.random.uniform(0, 0.5, (bucket_amount, bucket_amount, bucket_amount, bucket_amount, env.action_space.n))
+angle_min = -0.418
+angle_max = 0.418 
+velocity_min = -sys.maxsize
+velocity_max = sys.maxsize
+angular_vel_min = -sys.maxsize
+angular_vel_max = sys.maxsize
+position_min = -4.8
+position_max = 4.8
+bins_angle = np.linspace(angle_min, angle_max, bucket_amount)
+bins_angular_velocity = np.linspace(angular_vel_min, angular_vel_max, bucket_amount)
+bins_position = np.linspace(position_min, position_max, bucket_amount)
+bins_velocity = np.linspace(velocity_min, velocity_max, bucket_amount)
+
+def get_discrete_state(state):
+    cart_position = state[0]
+    cart_velocity =  state[1]
+    pole_ang = state[2]
+    pole_vel = state[3]
+    discrete_position = np.digitize(cart_position, bins_position)
+    discrete_velocity = np.digitize(cart_velocity, bins_velocity)
+    discrete_angle = np.digitize(pole_ang, bins_angle)
+    discrete_angular_velocity = np.digitize(pole_vel, bins_angular_velocity)
+    discretized_state = (discrete_position, discrete_velocity, discrete_angle, discrete_angular_velocity)
+    return discretized_state
+
+for episode in range(100):
+    episodeReward = 0
+
+    discrete_state = get_discrete_state(env.reset()[0]) 
+    done = False
+    while not done:
+        
+        action = np.argmax(q_table[discrete_state])
+        #print(discrete_state)
+        #print(action)
+        print(q_table[discrete_state])
+        #print(action)
+        obs, reward, done, info, _ = env.step(action)
+        episodeReward += reward
+        #print(obs)
+        #env.render()
+        time.sleep(0.05)
+        if done:
+            env.reset()
+
+    print("Reward Total en episodio ", episode, ": ", episodeReward)
+
+env.close()
+"""
+
+#AGENTE ENTRENAMIENTO
 import numpy as np 
 import gym
 import matplotlib.pyplot as plt
@@ -5,7 +70,7 @@ import sys
 
 LEARNING_RATE = 1
 DISCOUNT = 0.55 #Reward futuros vs rewards actuales, mide cuanto nos interesa lo futuro y lo actual
-episodes = 1000000
+episodes = 10
 show_every = 100000
 # Exploration settings
 STATS_EVERY = 100000
@@ -53,10 +118,10 @@ def epsilon_greedy_policy(state, Q, epsilon=0.1):
     explore = np.random.binomial(1, epsilon)
     if explore:
         action = env.action_space.sample()
-        #print('explore')
+        print('explore')
     else:
         action = np.argmax(Q[state])
-        #print('exploit')
+        print('exploit')
     return action
 
 def optimal_policy(state, Q):
@@ -64,6 +129,48 @@ def optimal_policy(state, Q):
     return action
 episode = 0
 
+for episode in range(episodes):
+    episode_reward = 0
+    if episode % save_every == 0:
+        np.save(f"qtables/{episode}-qtable.npy",q_table)
+        print(episode)
+    env.reset()
+    terminated = False
+    truncated = False
+    if episode % show_every == 0:
+        render = True
+        #print(episode)
+    else:
+        render = False
+    while not terminated and not truncated:
+        action = epsilon_greedy_policy(discrete_state, q_table, 0.5)
+        new_state, reward, terminated, truncated, info = env.step(action)
+        episode_reward += reward
+        new_discrete_state = get_discrete_state(new_state)
+        #if render:
+            #env.render()
+        if not terminated:
+            max_future_q = np.max(q_table[new_discrete_state])
+            current_q = q_table[discrete_state + (action, )]
+            new_q = (1 - LEARNING_RATE) * current_q + LEARNING_RATE * (reward + DISCOUNT * max_future_q)
+            print("q table antes bidimensional ", q_table[discrete_state])
+            print("q table antes ", q_table[discrete_state + (action, )])
+            print("Accion: ", action)
+            q_table[discrete_state + (action, )] = new_q
+            print("Nuevo Q: ", new_q)
+            print("q table actualizada ", q_table[discrete_state + (action, )])
+            print("q table actualizada bidimensional ", q_table[discrete_state])
+
+        if truncated:
+            print("Llegó al final en el episodio ", episode)
+        
+
+        discrete_state = new_discrete_state
+        print("#################################################")
+
+    #print("Reward total obtenido: ", episode_reward)
+
+"""
 for episode in range(episodes):
     episode_reward = 0
     if episode % save_every == 0:
@@ -115,3 +222,4 @@ plt.legend(loc=4)
 plt.show()  
 
 env.close()
+"""

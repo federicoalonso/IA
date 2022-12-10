@@ -1,0 +1,94 @@
+INFO:root:
+
+Round number "1"
+INFO:root:
+Total time: 0:03:25.408563
+INFO:root:
+Total Moves: 986
+INFO:root:"WON THE GAME!!!!!!!!"
+******************************************************
+INFO:root:
+
+Round number "2"
+INFO:root:
+Total time: 0:03:31.290984
+INFO:root:
+Total Moves: 1017
+INFO:root:"WON THE GAME!!!!!!!!"
+******************************************************
+INFO:root:
+
+Round number "3"
+INFO:root:
+Total time: 0:03:03.808807
+INFO:root:
+Total Moves: 997
+INFO:root:"Loser"
+******************************************************
+INFO:root:
+
+Round number "4"
+INFO:root:
+Total time: 0:03:48.602620
+INFO:root:
+Total Moves: 990
+INFO:root:"WON THE GAME!!!!!!!!"
+******************************************************
+INFO:root:
+
+Round number "5"
+INFO:root:
+Total time: 0:03:55.305264
+INFO:root:
+Total Moves: 1052
+INFO:root:"WON THE GAME!!!!!!!!"
+******************************************************
+INFO:root:
+
+Round number "6"
+INFO:root:
+Total time: 0:03:15.341431
+INFO:root:
+Total Moves: 948
+INFO:root:"WON THE GAME!!!!!!!!"
+******************************************************
+INFO:root:
+
+Round number "7"
+INFO:root:
+Total time: 0:04:34.248638
+INFO:root:
+Total Moves: 1038
+INFO:root:"WON THE GAME!!!!!!!!"
+******************************************************
+INFO:root:
+
+Round number "8"
+INFO:root:
+Total time: 0:03:18.446872
+INFO:root:
+Total Moves: 989
+INFO:root:"WON THE GAME!!!!!!!!"
+******************************************************
+INFO:root:
+
+Round number "9"
+INFO:root:
+Total time: 0:04:01.578104
+INFO:root:
+Total Moves: 995
+INFO:root:"WON THE GAME!!!!!!!!"
+******************************************************
+INFO:root:
+
+Round number "10"
+INFO:root:
+Total time: 0:02:49.215735
+INFO:root:
+Total Moves: 985
+INFO:root:"WON THE GAME!!!!!!!!"
+******************************************************
+INFO:root:"Results"******************************************************
+INFO:root:\Average Wons: 90.0%
+INFO:root:\Average Moves: 999.7
+INFO:root:\Average Time: 214.3247018

@@ -1,0 +1,94 @@
+INFO:root:
+
+Round number "1"
+INFO:root:
+Total time: 0:00:16.062518
+INFO:root:
+Total Moves: 1039
+INFO:root:"WON THE GAME!!!!!!!!"
+******************************************************
+INFO:root:
+
+Round number "2"
+INFO:root:
+Total time: 0:00:09.492657
+INFO:root:
+Total Moves: 994
+INFO:root:"WON THE GAME!!!!!!!!"
+******************************************************
+INFO:root:
+
+Round number "3"
+INFO:root:
+Total time: 0:00:05.301078
+INFO:root:
+Total Moves: 613
+INFO:root:"Loser"
+******************************************************
+INFO:root:
+
+Round number "4"
+INFO:root:
+Total time: 0:00:11.658709
+INFO:root:
+Total Moves: 1000
+INFO:root:"WON THE GAME!!!!!!!!"
+******************************************************
+INFO:root:
+
+Round number "5"
+INFO:root:
+Total time: 0:00:12.675190
+INFO:root:
+Total Moves: 1025
+INFO:root:"WON THE GAME!!!!!!!!"
+******************************************************
+INFO:root:
+
+Round number "6"
+INFO:root:
+Total time: 0:00:06.831355
+INFO:root:
+Total Moves: 806
+INFO:root:"Loser"
+******************************************************
+INFO:root:
+
+Round number "7"
+INFO:root:
+Total time: 0:00:09.463638
+INFO:root:
+Total Moves: 994
+INFO:root:"WON THE GAME!!!!!!!!"
+******************************************************
+INFO:root:
+
+Round number "8"
+INFO:root:
+Total time: 0:00:09.656017
+INFO:root:
+Total Moves: 976
+INFO:root:"WON THE GAME!!!!!!!!"
+******************************************************
+INFO:root:
+
+Round number "9"
+INFO:root:
+Total time: 0:00:11.181975
+INFO:root:
+Total Moves: 995
+INFO:root:"WON THE GAME!!!!!!!!"
+******************************************************
+INFO:root:
+
+Round number "10"
+INFO:root:
+Total time: 0:00:14.341702
+INFO:root:
+Total Moves: 1039
+INFO:root:"WON THE GAME!!!!!!!!"
+******************************************************
+INFO:root:"Results"******************************************************
+INFO:root:\Average Wons: 80.0%
+INFO:root:\Average Moves: 948.1
+INFO:root:\Average Time: 10.6664839

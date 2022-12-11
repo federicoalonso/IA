@@ -2,9 +2,9 @@ import numpy as np
 import gym
 import sys
 import time
-env = gym.make('CartPole-v1', render_mode='human')
+env = gym.make('CartPole-v1')
 
-q_table = np.load('9999999-qtable.npy')
+q_table = np.load('5600000-qtable.npy')
 
 
 discrete_buckets = [10]
@@ -35,7 +35,7 @@ def get_discrete_state(state):
     discretized_state = (discrete_position, discrete_velocity, discrete_angle, discrete_angular_velocity)
     return discretized_state
 
-for episode in range(100):
+for episode in range(10):
     episodeReward = 0
 
     discrete_state = get_discrete_state(env.reset()[0]) 
@@ -44,8 +44,8 @@ for episode in range(100):
         
         action = np.argmax(q_table[discrete_state])
         #print(discrete_state)
-        #print(action)
-        print(q_table[discrete_state])
+        print("Accion tomada ", action)
+        print("Qtable en el estado discreto ", q_table[discrete_state])
         #print(action)
         obs, reward, done, info, _ = env.step(action)
         episodeReward += reward

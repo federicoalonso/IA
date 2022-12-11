@@ -10,10 +10,10 @@ import gym
 env = gym.make('CartPole-v1')
 ep_rewards = []
 cumulative_reward = {'ep': [], 'avg': [], 'max': [], 'min': []}
-show_every = 500
-stats_every = 500
-save_every = 500
-episodes = 10000
+show_every = 50
+stats_every = 50
+save_every = 50
+episodes = 2000
 max_learning_rate = 1.0
 decrase_learning_rate_factor = 20
 max_exploration_rate = 1.0
@@ -64,7 +64,7 @@ for episode in range(episodes):
     current_state, done = get_discrete_state(initial_state[0], initial_state[1], initial_state[2], initial_state[3]), False
     if episode % save_every == 0:
         np.save(f"qtables/V5/{episode}-qtable.npy",Q)
-    #print(episode)
+    print(episode)
     """
     if episode % show_every == 0:
         print(episode)"""

@@ -19,13 +19,13 @@ def get_discrete_state( _ , __ , angle, pole_velocity ) -> Tuple[int,...]:
     return tuple(map(int,est.transform([[angle, pole_velocity]])[0]))
 
 #Carga la QTable a utilizar
-Q = np.load('9999-qtable.npy')
+Q = np.load('101-qtable.npy')
 
 
 def policy( state : tuple ):
     return np.argmax(Q[state])
 
-episodes = 1000000
+episodes = 10000
 sum_rewards = 0
 won_qty = 0
 for e in range(episodes):

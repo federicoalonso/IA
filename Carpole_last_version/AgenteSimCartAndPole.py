@@ -8,24 +8,23 @@ from typing import Tuple
 import gym
 env = gym.make('CartPole-v1', render_mode='human')
 
-n_bins = ( 6 , 12 )
-lower_bounds = [ env.observation_space.low[2], -math.radians(50) ]
-upper_bounds = [ env.observation_space.high[2], math.radians(50) ]
+n_bins = ( 6, 6, 6 , 12 )
+lower_bounds = [ env.observation_space.low[0], env.observation_space.low[1], env.observation_space.low[2], -math.radians(50) ]
+upper_bounds = [ env.observation_space.high[0], env.observation_space.high[1], env.observation_space.high[2], math.radians(50) ]
 
-def get_discrete_state( _ , __ , angle, pole_velocity ) -> Tuple[int,...]:
-    """Convert continues state intro a discrete state"""
+def get_discrete_state(cart_position, cart_velocity , angle, pole_velocity) -> Tuple[int,...]:
     est = KBinsDiscretizer(n_bins=n_bins, encode='ordinal', strategy='uniform')
     est.fit([lower_bounds, upper_bounds ])
-    return tuple(map(int,est.transform([[angle, pole_velocity]])[0]))
+    return tuple(map(int,est.transform([[cart_position, cart_velocity, angle, pole_velocity]])[0]))
 
 #Carga la QTable a utilizar
-Q = np.load('137-qtable.npy')
+Q = np.load('154-qtable.npy')
 
 
 def policy( state : tuple ):
     return np.argmax(Q[state])
 
-episodes = 150
+episodes = 10
 sum_rewards = 0
 won_qty = 0
 for e in range(episodes):

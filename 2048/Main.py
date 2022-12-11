@@ -1,11 +1,11 @@
 from datetime import datetime
 from GameBoard import GameBoard
 from Agent import Agent
-# from Random_Agent import RandomAgent
+from Random_Agent import RandomAgent
 from MiniMax_Agent import MiniMaxAgent
 from ExpectiMax_Agent import ExpectiMax_Agent
-# from MiniMax_Agent_2 import MiniMaxAgent
 import logging
+from csv_logger import CsvLogger
 
 def check_win(board: GameBoard):
     return board.get_max_tile() >= 2048
@@ -14,20 +14,44 @@ def check_win(board: GameBoard):
 int_to_string = ['UP', 'DOWN', 'LEFT', 'RIGHT']
 
 if __name__ == '__main__':
+
+    filename = './2048/log.csv'
+    delimiter = ','
+    level = logging.INFO
+    custom_additional_levels = ['log2']
+    fmt = f'%(asctime)s{delimiter}%(levelname)s{delimiter}%(message)s'
+    datefmt = '%Y/%m/%d %H:%M:%S'
+    max_size = 1000000  # 1 megabyte
+    max_files = 4  
+    header = ['date', 'level', 'time', 'result', 'depth', 'moves', 'heuristic', 'agent']
+    depth = 5
+    heuristic = 'mixed'
+    agent_name = 'expectimax'
+
+    csvlogger = CsvLogger(filename=filename,
+                        delimiter=delimiter,
+                        level=level,
+                        add_level_names=custom_additional_levels,
+                        add_level_nums=None,
+                        fmt=fmt,
+                        datefmt=datefmt,
+                        max_size=max_size,
+                        max_files=max_files,
+                        header=header)
     
     agent: Agent
     board: GameBoard
     # agent = MiniMaxAgent()
     agent = ExpectiMax_Agent()
-    logging.basicConfig(filename="./2048/EMAgent2-d4.txt", level=logging.INFO)
+    logging.basicConfig(filename="./2048/EMAgent-d5.txt", level=logging.INFO)
     results = []
     times = []
     total_moves = []
-    for i in range(5):
+    for i in range(3):
         board = GameBoard()
         done = False
         moves = 0
-        board.render()
+        # board.render()
         start = datetime.now()
 
         logging.info('\n\nRound number "{}"'.format(i + 1))
@@ -50,9 +74,11 @@ if __name__ == '__main__':
         if check_win(board):
             print("WON THE GAME!!!!!!!!")
             results.append(1)
+            csvlogger.log2([total_time, 1, depth, moves, heuristic, agent_name])
             logging.info('"WON THE GAME!!!!!!!!"\n******************************************************')
         else:
             print("BOOOOOOOOOO!!!!!!!!!")
+            csvlogger.log2([total_time, 0, depth, moves, heuristic, agent_name])
             results.append(0)
             logging.info('"Loser"\n******************************************************')
         

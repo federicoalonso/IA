@@ -2,7 +2,7 @@ import sys
 from Agent import Agent
 from GameBoard import GameBoard
 import numpy as np
-
+import random
 
 class ExpectiMax_Agent(Agent):
   def init(self):
@@ -45,7 +45,7 @@ class ExpectiMax_Agent(Agent):
     d -= 1
 
     possibleMoves = board.get_available_moves()
-    possibleMoves.sort()
+    random.shuffle(possibleMoves)
     
     for child in possibleMoves:
       grid = board.clone()
@@ -78,7 +78,8 @@ class ExpectiMax_Agent(Agent):
       childrens.append((cell, 2))
       childrens.append((cell, 4))
     
-    childrens.sort()
+    random.shuffle(childrens)
+
     tot_utility = 0
 
     posibility_2 = 0.9 * 1 / len(emptyCells)
@@ -98,7 +99,7 @@ class ExpectiMax_Agent(Agent):
 
     return (None, tot_utility)
 
-  def getBestMove(self, board: GameBoard, d: int = 4):
+  def getBestMove(self, board: GameBoard, d: int = 5):
     clone = board.clone()
     (child, _, moveFrom) = self.maxi(clone, d)
     return moveFrom

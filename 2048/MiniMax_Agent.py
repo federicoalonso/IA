@@ -14,6 +14,7 @@ class MiniMaxAgent(Agent):
   def heuristic_utility(self, board: GameBoard):
     return self.max_sq_coef_sum(board, 2)
 
+  # Primera función heurística que dio resultado
   def mixedHeuristic(self, board: GameBoard, weight: int):
     count = 0
     sum = 0
@@ -31,6 +32,7 @@ class MiniMaxAgent(Agent):
     smoothness = smoothness ** weight
     return snoes / smoothness
   
+  # agregamos al máximo valor
   def max_coef(self, board: GameBoard, weight: int):
     count = 0
     sum = 0
@@ -51,6 +53,7 @@ class MiniMaxAgent(Agent):
     smoothness = smoothness ** weight
     return (snoes / smoothness) + (max / 2048)
   
+  # agregamos la suma de valores
   def max_sq_coef(self, board: GameBoard, weight: int):
     count = 0
     sum = 0
@@ -71,6 +74,7 @@ class MiniMaxAgent(Agent):
     smoothness = smoothness ** weight
     return (snoes / smoothness) + (max / (2048**2))
 
+  # mejoramos la heurística anterior
   def max_sq_coef_sum(self, board: GameBoard, weight: int):
     count = 0
     sum_sq = 0
@@ -93,6 +97,7 @@ class MiniMaxAgent(Agent):
     smoothness = smoothness ** weight
     return (snoes / smoothness) + (max / (2048**2)) + (sum / 4096)
   
+  # probamos agregar lo las columnas y filas ordenadas
   def max_sq_coef_sum_col(self, board: GameBoard, weight: int):
     count = 0
     sum_sq = 0
@@ -135,6 +140,7 @@ class MiniMaxAgent(Agent):
 
     return (snoes / smoothness) + (max / (2048**2)) + (sum / 4096) + (ordered / 64)
 
+  # verificamos dando peso a la posición para que vaya cargando en espiral
   def mixedHeuristic_5(self, board: GameBoard, weight: int):
     posVal = 0
     for i in range(4):
@@ -184,8 +190,8 @@ class MiniMaxAgent(Agent):
     ## Cut
     # if len(emptyCells) >= 6 and d <= 3:
     #   return (None, self.heuristic_utility(board))
-    # if len(emptyCells) >= 6 and d <= 2:
-    #   return (None, self.heuristic_utility(board))
+    if len(emptyCells) >= 6 and d <= 2:
+      return (None, self.heuristic_utility(board))
 
     childrens = []
 
@@ -197,11 +203,6 @@ class MiniMaxAgent(Agent):
     count = 0
     
     for child in childrens:
-      if d <= 2:
-        if count < 10:
-          count += 1
-        else:
-          return (None, self.heuristic_utility(board))
       grid = board.clone()
       grid.insert_tile(child[0], child[1])
       (_, utility, _) = self.maxi(grid, a, b, d)
@@ -214,7 +215,7 @@ class MiniMaxAgent(Agent):
 
     return (minChild, minUtility)
 
-  def getBestMove(self, board: GameBoard, d: int = 6):
+  def getBestMove(self, board: GameBoard, d: int = 4):
     clone = board.clone()
     (child, _, moveFrom) = self.maxi(clone, (-1) * sys.maxsize, sys.maxsize, d)
     return moveFrom

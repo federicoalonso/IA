@@ -1,184 +1,185 @@
+
 INFO:root:
 
 Round number "1"
 INFO:root:
-Total time: 0:03:40.522850
+Total time: 0:04:33.908511
 INFO:root:
-Total Moves: 995
+Total Moves: 1016
 INFO:root:"WON THE GAME!!!!!!!!"
 ******************************************************
 INFO:root:
 
 Round number "2"
 INFO:root:
-Total time: 0:03:32.408949
+Total time: 0:03:59.205425
 INFO:root:
-Total Moves: 954
+Total Moves: 963
 INFO:root:"WON THE GAME!!!!!!!!"
 ******************************************************
 INFO:root:
 
 Round number "3"
 INFO:root:
-Total time: 0:04:34.360573
+Total time: 0:04:01.154823
 INFO:root:
-Total Moves: 985
+Total Moves: 1048
 INFO:root:"WON THE GAME!!!!!!!!"
 ******************************************************
 INFO:root:
 
 Round number "4"
 INFO:root:
-Total time: 0:04:25.456288
+Total time: 0:04:33.114366
 INFO:root:
-Total Moves: 1078
-INFO:root:"WON THE GAME!!!!!!!!"
+Total Moves: 1058
+INFO:root:"Loser"
 ******************************************************
 INFO:root:
 
 Round number "5"
 INFO:root:
-Total time: 0:04:14.562129
+Total time: 0:04:24.431551
 INFO:root:
-Total Moves: 1010
+Total Moves: 1000
 INFO:root:"WON THE GAME!!!!!!!!"
 ******************************************************
 INFO:root:
 
 Round number "6"
 INFO:root:
-Total time: 0:04:44.575792
+Total time: 0:04:42.652571
 INFO:root:
-Total Moves: 1038
-INFO:root:"WON THE GAME!!!!!!!!"
+Total Moves: 1009
+INFO:root:"Loser"
 ******************************************************
 INFO:root:
 
 Round number "7"
 INFO:root:
-Total time: 0:04:51.805226
+Total time: 0:03:40.798617
 INFO:root:
-Total Moves: 1018
-INFO:root:"Loser"
+Total Moves: 960
+INFO:root:"WON THE GAME!!!!!!!!"
 ******************************************************
 INFO:root:
 
 Round number "8"
 INFO:root:
-Total time: 0:04:38.250758
+Total time: 0:04:32.441528
 INFO:root:
-Total Moves: 1050
+Total Moves: 1028
 INFO:root:"WON THE GAME!!!!!!!!"
 ******************************************************
 INFO:root:
 
 Round number "9"
 INFO:root:
-Total time: 0:03:43.600542
+Total time: 0:04:52.760688
 INFO:root:
-Total Moves: 961
+Total Moves: 1019
 INFO:root:"WON THE GAME!!!!!!!!"
 ******************************************************
 INFO:root:
 
 Round number "10"
 INFO:root:
-Total time: 0:03:14.507054
+Total time: 0:04:02.503466
 INFO:root:
-Total Moves: 948
+Total Moves: 978
 INFO:root:"WON THE GAME!!!!!!!!"
 ******************************************************
 INFO:root:
 
 Round number "11"
 INFO:root:
-Total time: 0:04:07.178413
+Total time: 0:04:28.756397
 INFO:root:
-Total Moves: 973
+Total Moves: 1020
 INFO:root:"WON THE GAME!!!!!!!!"
 ******************************************************
 INFO:root:
 
 Round number "12"
 INFO:root:
-Total time: 0:04:24.498794
+Total time: 0:04:35.671582
 INFO:root:
-Total Moves: 1022
+Total Moves: 1026
 INFO:root:"WON THE GAME!!!!!!!!"
 ******************************************************
 INFO:root:
 
 Round number "13"
 INFO:root:
-Total time: 0:03:27.404689
+Total time: 0:04:32.382859
 INFO:root:
-Total Moves: 995
-INFO:root:"WON THE GAME!!!!!!!!"
+Total Moves: 1093
+INFO:root:"Loser"
 ******************************************************
 INFO:root:
 
 Round number "14"
 INFO:root:
-Total time: 0:04:29.582422
+Total time: 0:03:26.909327
 INFO:root:
-Total Moves: 1042
+Total Moves: 946
 INFO:root:"WON THE GAME!!!!!!!!"
 ******************************************************
 INFO:root:
 
 Round number "15"
 INFO:root:
-Total time: 0:03:56.734806
+Total time: 0:04:22.398141
 INFO:root:
-Total Moves: 1072
+Total Moves: 1019
 INFO:root:"WON THE GAME!!!!!!!!"
 ******************************************************
 INFO:root:
 
 Round number "16"
 INFO:root:
-Total time: 0:03:52.979052
+Total time: 0:05:01.460619
 INFO:root:
-Total Moves: 1025
-INFO:root:"Loser"
+Total Moves: 1117
+INFO:root:"WON THE GAME!!!!!!!!"
 ******************************************************
 INFO:root:
 
 Round number "17"
 INFO:root:
-Total time: 0:02:22.901839
+Total time: 0:03:44.510442
 INFO:root:
-Total Moves: 694
-INFO:root:"Loser"
+Total Moves: 963
+INFO:root:"WON THE GAME!!!!!!!!"
 ******************************************************
 INFO:root:
 
 Round number "18"
 INFO:root:
-Total time: 0:04:00.796685
+Total time: 0:03:30.364017
 INFO:root:
-Total Moves: 994
+Total Moves: 967
 INFO:root:"WON THE GAME!!!!!!!!"
 ******************************************************
 INFO:root:
 
 Round number "19"
 INFO:root:
-Total time: 0:03:13.041865
+Total time: 0:04:16.179968
 INFO:root:
-Total Moves: 954
-INFO:root:"Loser"
+Total Moves: 1003
+INFO:root:"WON THE GAME!!!!!!!!"
 ******************************************************
 INFO:root:
 
 Round number "20"
 INFO:root:
-Total time: 0:03:19.326900
+Total time: 0:03:56.031125
 INFO:root:
-Total Moves: 1051
-INFO:root:"Loser"
+Total Moves: 978
+INFO:root:"WON THE GAME!!!!!!!!"
 ******************************************************
 INFO:root:"Results"******************************************************
-INFO:root:\Average Wons: 80.0%
-INFO:root:\Average Moves: 992.75
-INFO:root:\Average Time: 236.8575
+INFO:root:\Average Wons: 85.0%
+INFO:root:\Average Moves: 1010.55
+INFO:root:\Average Time: 255.88180115

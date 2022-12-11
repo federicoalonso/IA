@@ -43,7 +43,7 @@ class MiniMaxAgent(Agent):
           pos = 3 - pos
         elif pos > 7 and pos <= 11:
           pos = 11 - pos + 8
-        posVal += board.grid[i][j] * pos
+        posVal += board.grid[i][j] * pos * pos
     return posVal
 
   # El mismo mixto, pero favorecemos los valores altos hacia abajo a la derecha

@@ -12,8 +12,7 @@ class MiniMaxAgent(Agent):
     return self.getBestMove(board)
 
   def heuristic_utility(self, board: GameBoard):
-    return self.mixedHeuristic(board, 2)
-    # return self.max_sq_coef_sum(board, 2)
+    return self.max_sq_coef_sum(board, 2)
 
   def mixedHeuristic(self, board: GameBoard, weight: int):
     count = 0
@@ -136,6 +135,18 @@ class MiniMaxAgent(Agent):
 
     return (snoes / smoothness) + (max / (2048**2)) + (sum / 4096) + (ordered / 64)
 
+  def mixedHeuristic_5(self, board: GameBoard, weight: int):
+    posVal = 0
+    for i in range(4):
+      for j in range(4):
+        pos = 4 * (i % 4) + j
+        if pos < 4:
+          pos = 3 - pos
+        elif pos > 7 and pos <= 11:
+          pos = 11 - pos + 8
+        posVal += board.grid[i][j] * pos * pos
+    return posVal
+
   def maxi(self, board: GameBoard, a: int, b: int, d: int):
     (maxChild, maxUtility, moveFrom) = (None, (-1) * sys.maxsize, -1)
 
@@ -173,8 +184,8 @@ class MiniMaxAgent(Agent):
     ## Cut
     # if len(emptyCells) >= 6 and d <= 3:
     #   return (None, self.heuristic_utility(board))
-    if len(emptyCells) >= 6 and d <= 2:
-      return (None, self.heuristic_utility(board))
+    # if len(emptyCells) >= 6 and d <= 2:
+    #   return (None, self.heuristic_utility(board))
 
     childrens = []
 
@@ -183,8 +194,14 @@ class MiniMaxAgent(Agent):
       childrens.append((cell, 4))
     
     childrens.sort()
+    count = 0
     
     for child in childrens:
+      if d <= 2:
+        if count < 10:
+          count += 1
+        else:
+          return (None, self.heuristic_utility(board))
       grid = board.clone()
       grid.insert_tile(child[0], child[1])
       (_, utility, _) = self.maxi(grid, a, b, d)
@@ -197,7 +214,7 @@ class MiniMaxAgent(Agent):
 
     return (minChild, minUtility)
 
-  def getBestMove(self, board: GameBoard, d: int = 7):
+  def getBestMove(self, board: GameBoard, d: int = 6):
     clone = board.clone()
     (child, _, moveFrom) = self.maxi(clone, (-1) * sys.maxsize, sys.maxsize, d)
     return moveFrom

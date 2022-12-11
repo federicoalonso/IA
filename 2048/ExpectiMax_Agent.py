@@ -98,7 +98,7 @@ class ExpectiMax_Agent(Agent):
 
     return (None, tot_utility)
 
-  def getBestMove(self, board: GameBoard, d: int = 5):
+  def getBestMove(self, board: GameBoard, d: int = 4):
     clone = board.clone()
     (child, _, moveFrom) = self.maxi(clone, d)
     return moveFrom

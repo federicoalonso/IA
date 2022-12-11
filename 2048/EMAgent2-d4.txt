@@ -1,0 +1,150 @@
+INFO:root:
+
+Round number "1"
+INFO:root:
+
+Round number "1"
+INFO:root:
+Total time: 0:00:29.379849
+INFO:root:
+Total Moves: 912
+INFO:root:"Loser"
+******************************************************
+INFO:root:
+
+Round number "2"
+INFO:root:
+Total time: 0:00:38.652991
+INFO:root:
+Total Moves: 973
+INFO:root:"Loser"
+******************************************************
+INFO:root:
+
+Round number "3"
+INFO:root:
+Total time: 0:00:11.599934
+INFO:root:
+Total Moves: 487
+INFO:root:"Loser"
+******************************************************
+INFO:root:
+
+Round number "4"
+INFO:root:
+Total time: 0:00:13.216376
+INFO:root:
+Total Moves: 550
+INFO:root:"Loser"
+******************************************************
+INFO:root:
+
+Round number "5"
+INFO:root:
+Total time: 0:00:14.610339
+INFO:root:
+Total Moves: 582
+INFO:root:"Loser"
+******************************************************
+INFO:root:"Results"******************************************************
+INFO:root:\Average Wons: 0.0%
+INFO:root:\Average Moves: 700.8
+INFO:root:\Average Time: 21.491897799999997
+INFO:root:
+
+Round number "1"
+INFO:root:
+Total time: 0:00:28.807040
+INFO:root:
+Total Moves: 752
+INFO:root:"Loser"
+******************************************************
+INFO:root:
+
+Round number "2"
+INFO:root:
+Total time: 0:00:26.361281
+INFO:root:
+Total Moves: 860
+INFO:root:"Loser"
+******************************************************
+INFO:root:
+
+Round number "3"
+INFO:root:
+Total time: 0:00:20.292616
+INFO:root:
+Total Moves: 575
+INFO:root:"Loser"
+******************************************************
+INFO:root:
+
+Round number "4"
+INFO:root:
+Total time: 0:00:30.795084
+INFO:root:
+Total Moves: 885
+INFO:root:"Loser"
+******************************************************
+INFO:root:
+
+Round number "5"
+INFO:root:
+Total time: 0:00:31.785482
+INFO:root:
+Total Moves: 852
+INFO:root:"Loser"
+******************************************************
+INFO:root:"Results"******************************************************
+INFO:root:\Average Wons: 0.0%
+INFO:root:\Average Moves: 784.8
+INFO:root:\Average Time: 27.6083006
+INFO:root:
+
+Round number "1"
+INFO:root:
+Total time: 0:00:41.650591
+INFO:root:
+Total Moves: 1090
+INFO:root:"WON THE GAME!!!!!!!!"
+******************************************************
+INFO:root:
+
+Round number "2"
+INFO:root:
+Total time: 0:00:40.748925
+INFO:root:
+Total Moves: 1082
+INFO:root:"Loser"
+******************************************************
+INFO:root:
+
+Round number "3"
+INFO:root:
+Total time: 0:00:28.992538
+INFO:root:
+Total Moves: 891
+INFO:root:"Loser"
+******************************************************
+INFO:root:
+
+Round number "4"
+INFO:root:
+Total time: 0:00:34.063189
+INFO:root:
+Total Moves: 1034
+INFO:root:"Loser"
+******************************************************
+INFO:root:
+
+Round number "5"
+INFO:root:
+Total time: 0:00:37.445566
+INFO:root:
+Total Moves: 1013
+INFO:root:"WON THE GAME!!!!!!!!"
+******************************************************
+INFO:root:"Results"******************************************************
+INFO:root:\Average Wons: 40.0%
+INFO:root:\Average Moves: 1022.0
+INFO:root:\Average Time: 36.5801618

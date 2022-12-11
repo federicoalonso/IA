@@ -126,6 +126,21 @@ En la siguiente figura se muestra el ejemplo que vamos a desarrollar:
 
 ![figura1](./assets/abprunning2.PNG)
 
+### ExpectiMax
+
+Como en este ejercicio conocemos el comportamiento del contrincante, y sabemos con precisión cuál es la distribución de sus jugadas, es que podemos implementar el agente ExpectiMax. 
+
+Sabemos que el juego, en un lugar vacío al azar, nos pondrá un 2 o un 4 con una distribución del 90 y 10 porciento respectivamente, por lo que también implementamos dicho agente, pudiendo de esta forma compararlo con MiniMax y seleccionar el que nos es más conveniente.
+
+La diferencia principal de este agente con el anterior, es que no podemos realizar poda en el mismo, lo que conlleva a que los tiempos se incrementen notoriamente. Como consecuencia de lo anterior, los tiempos se vieron aumentados un 500%, y para poder trabajar con ellos decidimos hacer una especie de poda parcial. Si el algoritmo llegaba a una profundidad en la que sólo le falten 2 niveles, y además, si en ese momento tenemos más de 6 lugares libres en los que se puedan poner un número, entonces cortaremos el análisis y retornaremos el valor actual del tablero. 
+
+```py
+if len(emptyCells) >= 6 and d <= 2:
+    return (None, self.heuristic_utility(board))
+```
+
+De esta forma logramos reducir a 1/5 los tiempos.
+
 ### Hiperparámetros
 
 En el proyecto tenemos dos hiperparámetros base para comenzar a analizar, la profundidad y la función heurística.
@@ -167,6 +182,88 @@ Obtuvimos los siguientes resultados:
 | Sólo favorecer posición | 0 |
 
 Como resultado obtuvimos que tanto el smoothnes como la suma de valores en conjunto nos brindan los mejores parámetros de rendimiento.
+
+En ese momento pensamos que habíamos logrado una función estable y consistente, pero al momento de calcular un valor ganador y otro perdedor, nos llevamos una sorpresa. Si bien mantenía una relación de que un valor ganador era mejor que uno perdedor, todos los valores se mantenían entre 0 y 1, y terminaba siendo 1 siempre que hubiera un sólo número en el tablero, lo que era un error. Mantenía relación con el smoothness pero no era una buena función.
+
+![fh1](./assets/fh1.png)
+![fh2](./assets/fh2.png)
+
+Verificamos de esta forma que podíamos mejorarla si agregábamos el máximo valor a la función. Para favorecer que siempre se intente tener un nuevo máximo sobre otras cosas, utilizamos el máximo valor al cuadrado, y para que el número se mantuviera entre 0 y 1 (para que sea compatible con la función que veníamos implementando), lo dividimos entre el cuadrado de 2048 que es el máximo que se podía alcanzar.
+
+Luego vimos que la suma de todos los números era un valor que debía ser tomado con mayor relevancia, por lo que agregamos el factor de la suma, pero la dividimos entre 4096 (fuimos llegando a dicho valor con múltiples pruebas), de esta forma el factor nos quedó con un número que muy pocas veces superaba el 1.
+
+##### Caso Ganador
+
+![fh3](./assets/fh3.png)
+
+##### Caso Intermedio
+
+![fh4](./assets/fh4.png)
+
+##### Caso Perdedor
+
+![fh5](./assets/fh5.png)
+
+Finalmente, probamos dos funciones más que no tuvieron buenos resultados, una era contemplar que se tuviera un órden creciente en algún sentido, y la otra que se valoraran los números según su posición, dejando los de más valor abajo a la derecha e ir subiendo de valor de forma de serpiente (extagimos dicha función de jugar el juego). Probamos varias veces ambos algoritmos con dichas funciones, pero no lograron resultados positivos notables, ni siquiera agregándolos como factor de la función que venía funcionando.
+
+Tanto para analizar los casos que funcionaron como los que no, tuvimos que probar con valores, verificar nuestras intenciones en el excel, debuguear el código y randerizarlo para ver cómo se comportaba la máquina. Vimos por ejemplo, que algunos casos variaba dependiendo de si estábamos probando con expectimax o con minimax, muchas veces no iba hacia cierto lugar porque seguramente dentro de las peores posibilidades no se obtenían los resultados. O vimos también que si bien programamos las funciones pensando en lo que realizamos cuando jugamos en persona, al llevarlo a código, y la máquina no salirse del guión (como sí lo hacemos nosotros), la técnica no era favorable.
+
+Al final la función heurística nos quedó toda junta en una sóla función a efecto de ahorrar cómputo, quedó de la siguiente manera:
+
+```py
+def max_sq_coef_sum(self, board: GameBoard, weight: int):
+  count = 0 # cantidad de lugares ocupados
+  sum_sq = 0 # la suma de los números al cuadrado
+  sum = 0 # la suma de los números
+  max = 0 # el número más elevado
+  smoothness = 0
+  for i in range(4):
+    for j in range(4):
+      if i < 3:
+        smoothness += abs(board.grid[i][j] - board.grid[i + 1][j])
+      if j < 3:
+        smoothness += abs(board.grid[i][j] - board.grid[i][j + 1])
+      sum_sq += board.grid[i][j] ** 2
+      sum += board.grid[i][j]
+      if board.grid[i][j] ** 2 > max:
+        max = board.grid[i][j] ** 2
+      if board.grid[i][j] != 0:
+        count += 1
+  snoes = int(sum_sq/count) # relación entre la suma de los números y los lugares ocupados 
+  # favorece que sean números grandes y muchos lugares libres, cuanto más grande mejor
+  smoothness = smoothness ** weight # el smoothnes elevado al cuadrado, usamos un weight = 2
+  # favorece que los números similares permanezcan juntos, cuanto más grande es peor
+  return (snoes / smoothness) + (max / (2048**2)) + (sum / 4096)
+  # nos sirvió relacionar en una división el snoes y smoothness
+  # se suma además el número más elevado, relacionado con 2048 al cuadrado
+  # también se contempla la suma de los números dividido entre 4096
+```
+
+### Análisis de los agentes
+
+Durante el transcurso del obligatorio pudimos darnos cuenta de que no teníamos un agente estable, ante las mismas circunstancias, se corrían 10 veces para probar su funcionamiento y podía resultar en que ganaba 8, como podía resultar que ganaba 3, por lo que nos decidimos por realizar varios niveles para ponerlos a prueba.
+
+En un primer nivel, corridas de 50 repeticiones con una profundidad de 4, que son corridas rápidas, y documentar el log en un archivo. Con este nivel probamos las funciones heurísticas.
+
+Una vez tenida la función heurística, pasamos a un segundo nivel, corriendo los dos agentes con una profundidad de 4, pero 50 veces. En este caso decidimos si utilizar MiniMax o ExpectiMax.
+
+Finalmente pasamos a un tercer nivel con 20 corridas y una profundidad de 5 para ExpectiMax o 6 para MiniMax, donde verificamos el rendimiento con corridas más prolongadas.
+
+Los resultados son los siguientes:
+
+![res1](./assets/res1.png)
+
+En la imágen, se puede ver en el cuadrante superior el comportamiento de las heurísticas, la nomenclatura es la siguiente:
+
+- OldHeuristic es la primer función heurística a la que llegamos, que relaciona el snoes / smoothness
+- OldMaxSumSq es la última función que empleamos, la que se explicó en la sección anterior.
+- OldMaxSumSqOrd es la que implementamos agregando peso al órden de las filas y columnas, esta no tuvo resultado y no se ve en el código.
+
+Del lado derecho vemos como mejora la función al aumentar la profundidad de estudio. El objetivo que tuvimos era mantenerlo por debajo de los 5 minutos, por lo que llegamos a una profundidad de 5 para ExpectiMax y 6 para MiniMax.
+
+Finalmente, podemos ver que para el ejercicio planteado, ExpectiMax es mejor agente que MiniMax. Esto se debe a que muchas veces por no caer en el peor caso no toma opciones válidas para ir hacia la victoria, y además que al conocer específicamente cómo funciona el algoritmo del juego, podemos utilizarlo a nuestro favor, mejorando de esta forma nuestas ganancias.
+
+El ejercicio lo dejamos pronto para correr con el agente ExpectiMax y una profundidad de 5, que fue la que dió mejores resultados y se mantuvo dentro de un tiempo razonable.
 
 ### Referencias
 

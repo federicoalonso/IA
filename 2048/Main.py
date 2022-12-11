@@ -17,13 +17,13 @@ if __name__ == '__main__':
     
     agent: Agent
     board: GameBoard
-    agent = MiniMaxAgent()
-    # agent = ExpectiMax_Agent()
-    logging.basicConfig(filename="./2048/MMAgent_test-d6.txt", level=logging.INFO)
+    # agent = MiniMaxAgent()
+    agent = ExpectiMax_Agent()
+    logging.basicConfig(filename="./2048/EMAgent2-d4.txt", level=logging.INFO)
     results = []
     times = []
     total_moves = []
-    for i in range(1):
+    for i in range(5):
         board = GameBoard()
         done = False
         moves = 0

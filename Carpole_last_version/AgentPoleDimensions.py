@@ -64,12 +64,10 @@ for episode in range(episodes):
     current_state, done = get_discrete_state(initial_state[0], initial_state[1], initial_state[2], initial_state[3]), False
     if episode % save_every == 0:
         np.save(f"qtables/V5/{episode}-qtable.npy",Q)
-    print(episode)
-    """
+    #print(episode)
+    
     if episode % show_every == 0:
-        print(episode)"""
-    learning_rate_decreased -= decrease_learning_rate_step
-    learning_rate_decreased -= decrease_exploration_rate_step
+        print(episode)
     truncated = False
     while not done and not truncated: 
         action = policy(current_state) # exploit    

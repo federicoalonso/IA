@@ -25,7 +25,7 @@ Q = np.load('137-qtable.npy')
 def policy( state : tuple ):
     return np.argmax(Q[state])
 
-episodes = 150
+episodes = 5
 sum_rewards = 0
 won_qty = 0
 for e in range(episodes):

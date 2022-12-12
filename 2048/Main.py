@@ -15,7 +15,7 @@ int_to_string = ['UP', 'DOWN', 'LEFT', 'RIGHT']
 
 if __name__ == '__main__':
 
-    filename = './2048/log.csv'
+    filename = './log.csv'
     delimiter = ','
     level = logging.INFO
     custom_additional_levels = ['log2']
@@ -43,7 +43,7 @@ if __name__ == '__main__':
     board: GameBoard
     # agent = MiniMaxAgent()
     agent = ExpectiMax_Agent()
-    logging.basicConfig(filename="./2048/EMAgent-d5.txt", level=logging.INFO)
+    logging.basicConfig(filename="./EMAgent-d5.txt", level=logging.INFO)
     results = []
     times = []
     total_moves = []
